@@ -1,6 +1,6 @@
 {
   "name": "@hamzav/react-native-headerbar",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Header bar with a hamburger menu for react-native apps",
   "main": "index.js",
   "scripts": {
