@@ -1,6 +1,6 @@
-# ChatBot
+# React Native Header Bar
 
-A Simple react-native Chat Bot.
+Header bar with a hamburger menu for react-native apps.
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ Have an up and running react-native project. See https://facebook.github.io/reac
 To install component, navigate to project root directory and run
 
 ```
-npm install react-native-simple-chatbot
+npm install react-native-simple-headerbar
 ```
 
 ## Documentation
@@ -34,175 +34,29 @@ npm install react-native-simple-chatbot
 
 | Name | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
-| `ChatBotID` | `PropTypes.string` | Yes |  | Unique ID for the Chat Bot. |
-| `questions` | `PropTypes.array` | Yes |  | Array for the Chat Bot questions. |
-| `chatHeader` | `PropTypes.string` | Yes |  | Small text prior to asking questions. |
-| `userIcon` | `PropTypes.object` | Yes |  | User Icon image source. |
-| `cpuIcon` | `PropTypes.object` | Yes |  | CPU Icon image source. |
-| `imagesArray` | `PropTypes.object` | Yes |  | Array of React.Component images |
-| `ref` | `PropTypes.string` | No |  | Used for referencing in parent react-native js file. |
-| `customComponentCallback` | `PropTypes.func` | No |  | Function to add and handle custom components. |
-| `onChatEndCallback` | `PropTypes.func` | No |  | Function to handle chat completion. |
-| `previousValue` | `PropTypes.object` | No |  | Variable to initialize chat. |
-
-### Steps
-
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `id` | `string` | Yes | Unique ID for step |
-| `message` | `string` | No | CPU message to the user. |
-| `user` | `boolean` | Yes | Boolean to determine wheter user input is required. |
-| `multipleOptionsSelect` | `boolean` | No | Boolean to determine if user can select multiple options. |
-| `options` | `array` | No | Array to hold options for user to select. |
-| `slider` | `array` | No | Array to hold options for the slider. |
-| `custom` | `boolean` | No | Boolean to determine if a custom component is used. |
-| `customid` | `string` | No | Unique ID for the custom component. |
-| `trigger` | `string` | Yes | Unique ID for the Chat Bot to determine next step. |
-| `end` | `boolean` | Yes | Boolean to determine end of chat. |
-
-#### Options
-
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `value` | `string` | Yes | Value for choice. |
-| `trigger` | `string` | Yes | Unique ID for the Chat Bot to determine next step. |
-| `imageU` | `string` | No | Image id (from images.js) for unselected choice. |
-| `imageS` | `string` | No | Image id (from images.js) once user selects choice. |
-
-#### Slider
-
-| Name | Type | Required | Description |
-| --- | --- | --- | --- |
-| `value` | `number` | Yes | Value for choice. |
-| `trigger` | `string` | Yes | Unique ID for the Chat Bot to determine next step. |
-| `marker` | `string` | Yes | Value saved by ChatBot. |
+| `hideHamburgerMenu` | `PropTypes.boolean` | No |  | Boolean to hide hamburger menu. |
+| `onMenuPress` | `PropTypes.func` | No |  | Function to handle on hambruger menu press. |
+| `hamburgerMenuColor` | `PropTypes.string` | No |  | String to hold hamburger menu color. |
+| `text` | `PropTypes.string` | No |  | Title for the header. |
+| `textStyle` | `PropTypes.object` | No |  | CSS object to style text. |
+| `showBackButton` | `PropTypes.boolean` | No |  | Boolean to control if back button should be shown. (hideHamburgerMenu takes precedence) |
+| `onBackButtonPress` | `PropTypes.func` | No |  | Function to handle on back button press. |
+| `style` | `PropTypes.object` | No |  | CSS object to style bar. |
 
 ### Usage
 
 #### Within react-native js file
 
 ```
-import ChatBot from 'react-native-simple-chatbot';
-import images from '.../images/images';
+import Header from 'react-native-headerbar';
 
-const ChatFile = require('../json/chatbot.json'); // Array from json file for chatbot
-
-customComponents(customID) {
-    if (customID === 'CustomID') {
-        this.refs.handleCustomReturn('Some Text'); // Method to add Text to Chat Bot
-        this.refs.addCustomToChatArray(<CustomComponent />); // Method to add a custom react-native component to Chat Bot
-    }
-}
-
-<ChatBot
-    ref="ChatBot"
-    ChatBotID="ChatBot ID"
-    questions={ChatFile.chatone} 
-    chatHeader={(new Date()).toDateString()}
-    customComponentCallback={this.customComponents.bind(this)}
-    userIcon={images.UserIcon}
-    cpuIcon={images.CPUIcon}
-    imagesArray={images}
+<Header
+    hideHamburgerMenu={false}
+    hamburgerMenuColor="white"
+    onMenuPress={...}
+    text="Example"
+    textStyle={...}
 />
-```
-
-#### Within json file
-
-```
-{
-    "chatone": [
-        {
-            "id": "1",
-            "message": "Hello. ",
-            "user": "false",
-            "options": [],
-            "slider": [],
-            "custom": "false",
-            "customid": "",
-            "trigger": "2",
-            "end": "false"
-        },
-        {
-            "id": "2",
-            "message": "",
-            "user": "true",
-            "options": [],
-            "slider": [],
-            "custom": "false",
-            "customid": "",
-            "trigger": "3",
-            "end": "false"
-        },
-        {
-            "id": "3",
-            "message": "",
-            "user": "true",
-            "multipleOptionsSelect": "false",
-            "options": [
-                {"value": "Yes", "trigger": "4","imageU": "", "imageS": ""},
-                {"value": "No", "trigger": "4","imageU": "", "imageS": ""}
-            ],
-            "slider": [],
-            "custom": "false",
-            "customid": "",
-            "trigger": "",
-            "end": "false"
-        },
-        {
-            "id": "4",
-            "message": "",
-            "user": "false",
-            "options": [],
-            "slider": [],
-            "custom": "true",
-            "customid": "CustomID",
-            "trigger": "5",
-            "end": "false"
-        },
-        {
-            "id": "5",
-            "message": "",
-            "user": "true",
-            "options": [],
-            "slider": [
-                {"value": "1", "trigger": "6", "marker": "None"},
-                {"value": "2", "trigger": "6", "marker": "Little"},
-                {"value": "3", "trigger": "6", "marker": "Somewhat"},
-                {"value": "4", "trigger": "6", "marker": "A bit"},
-                {"value": "5", "trigger": "6", "marker": "A lot"}
-            ],
-            "custom": "false",
-            "customid": "",
-            "trigger": "",
-            "end": "false"
-        },
-        {
-            "id": "6",
-            "message": "Thank you.",
-            "user": "false",
-            "options": [],
-            "slider": [],
-            "custom": "false",
-            "customid": "",
-            "trigger": "",
-            "end": "true"
-        }
-    ]
-}
-```
-
-#### Within images.js
-
-```
-const images = {
-    // Image for logo
-    Logo: require('../images/Logo.png'),
-    // Image for ChatBot Icons
-    UserIcon: require("../images/user_icon.png"),
-    CPUIcon: require("../images/cpu_Logo.png"),
-};
-
-export default images;
 ```
 
 ## Built With
@@ -225,5 +79,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Inspiration - https://github.com/FaridSafi/react-native-gifted-chat
-* Inspiration - https://github.com/LucasBassetti/react-simple-chatbot
+* Inspiration - https://github.com/fattahmuhyiddeen/react-native-arrow

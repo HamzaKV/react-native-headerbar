@@ -1,13 +1,15 @@
 {
   "name": "@hamzav/react-native-headerbar",
   "version": "1.0.0",
-  "description": "",
+  "description": "Header bar with a hamburger menu for react-native apps",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "react-native-header"
+    "react-native-header",
+    "react-native-headerbar",
+    "headerbar"
   ],
   "author": "hamzav <hamzakv333@gmail.com>",
   "license": "MIT"
